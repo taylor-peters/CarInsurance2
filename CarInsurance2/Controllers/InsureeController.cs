@@ -50,6 +50,48 @@ namespace CarInsurance2.Controllers
         {
             if (ModelState.IsValid)
             {
+                Console.Write(DateTime.Now.AddYears(-19));
+                insuree.Quote = 50;
+                if (insuree.DateOfBirth >= (DateTime.Now.AddYears(-18)))
+                {
+                    insuree.Quote += 100;
+                }
+                else if (insuree.DateOfBirth <= (DateTime.Now.AddYears(-19)) && (insuree.DateOfBirth >= (DateTime.Now.AddYears(-25))))
+                {
+                    insuree.Quote += 50;
+                }
+                else
+                {
+                    insuree.Quote += 25;
+                }
+                if (insuree.CarYear < 2000)
+                {
+                    insuree.Quote += 25;
+                }
+                else if (insuree.CarYear > 2015)
+                {
+                    insuree.Quote += 25;
+                }
+                if (insuree.CarMake == "Porsche")
+                {
+                    insuree.Quote += 25;
+                }
+                if (insuree.CarMake == "Porsche" && insuree.CarModel == "911 Carrera")
+                {
+                    insuree.Quote += 25;
+                }
+                for (int i = 0; i < insuree.SpeedingTickets; i++)
+                {
+                    insuree.Quote += 10;
+                }
+                if (insuree.DUI)
+                {
+                    insuree.Quote += (insuree.Quote / 4);
+                }
+                if (insuree.CoverageType)
+                {
+                    insuree.Quote += (insuree.Quote / 2);
+                }
                 db.Insurees.Add(insuree);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,40 +124,6 @@ namespace CarInsurance2.Controllers
         {
             if (ModelState.IsValid)
             {
-                Console.Write(DateTime.Now.AddYears(-19));
-                insuree.Quote = 50;
-                if (insuree.DateOfBirth >= (DateTime.Now.AddYears(-18)))
-                {
-                    insuree.Quote += 100;
-                }
-                else if (insuree.DateOfBirth <= (DateTime.Now.AddYears(-19)) && (insuree.DateOfBirth >= (DateTime.Now.AddYears(-25))))
-                {
-                    insuree.Quote += 50;
-                }
-                else
-                {
-                    insuree.Quote += 25;
-                }
-                if (insuree.CarYear < 2015)
-                {
-                    insuree.Quote += 25;
-                }
-                if (insuree.CarMake == "Porsche" && insuree.CarModel == "911 Carrera")
-                {
-                    insuree.Quote += 25;
-                }
-                for (int i = 0; i < insuree.SpeedingTickets; i++)
-                {
-                    insuree.Quote += 10;
-                }
-                if (insuree.DUI)
-                {
-                    insuree.Quote += (insuree.Quote / 4);
-                }
-                if (insuree.CoverageType)
-                {
-                    insuree.Quote += (insuree.Quote / 2);
-                }
                 db.Insurees.Add(insuree);
                 db.SaveChanges();
                 return RedirectToAction("Index");

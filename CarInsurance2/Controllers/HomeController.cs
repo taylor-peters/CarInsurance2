@@ -28,27 +28,5 @@ namespace CarInsurance2.Controllers
 
             return View();
         }
-
-        public ActionResult Admin()
-        {
-            using (InsuranceEntities ins = new InsuranceEntities())
-            {
-                var insurees = ins.Insurees;
-                var insureeVms = new List<InsureeVm>();
-                foreach (var user in insurees)
-                {
-                    var newIns = new InsureeVm();
-                    newIns.FirstName = user.FirstName;
-                    newIns.LastName = user.LastName;
-                    newIns.EmailAddress = user.EmailAddress;
-                    newIns.Quote = user.Quote;
-
-                    insureeVms.Add(newIns);
-                }
-
-                return View(insureeVms);
-
-            }
-        }
     }
 }
